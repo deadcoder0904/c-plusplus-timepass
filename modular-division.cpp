@@ -37,9 +37,14 @@ int main()
 }
 
 /*
-Faster than a Python Compiler
+
+If we need to calculate - 111111111111111111111111111111 ^ 111111111111 % 12312 then it does it faster than a 
+Pythonic Compiler
+
 Input-
 111111111111111111111111111111 111111111111 12312
+
 Output-
 46122792424001
+
 */
