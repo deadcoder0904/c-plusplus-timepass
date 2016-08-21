@@ -35,3 +35,11 @@ int main()
 	cout<<modular_division(m,power,modular);
 	return 0;
 }
+
+/*
+Faster than a Python Compiler
+Input-
+111111111111111111111111111111 111111111111 12312
+Output-
+46122792424001
+*/
