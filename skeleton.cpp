@@ -12,6 +12,8 @@
 #include <cstring>
 #include <cstdlib>
 #include <cctype>
+#include <numeric>
+#include <complex>
 
 using namespace std;
 
