@@ -19,6 +19,8 @@ using namespace std;
 
 #define min(x,y) x<y?x:y
 #define max(x,y) x>y?x:y
+#define even(x) x&1?0:1
+#define odd(x) x&1?1:0
 #define REP(i,n) for (int i = 0; i < n; ++i)
 #define REP1(i,n,step) for (int i = 0; i < n; i+=step)
 #define REP2(i,x,y) for (int i = x; i < y; i++)
