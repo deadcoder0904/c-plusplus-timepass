@@ -23,6 +23,10 @@ using namespace std;
 #define REP1(i,n,step) for (int i = 0; i < n; i+=step)
 #define REP2(i,x,y) for (int i = x; i < y; i++)
 #define REP3(i,x,y,step) for (int i = x; i < y; i+=step)
+#define NREP(i,n) for (int i = n-1 ; i >= 0; --i)
+#define NREP1(i,n,step) for (int i = n-1 ; i >= 0; i-=step)
+#define NREP2(i,x,y) for (int i = x; i >= y; i--)
+#define NREP3(i,x,y,step) for (int i = x; i >= y; i-=step)
 #define sortv(a) sort(a.begin(),a.end())
 
 #define pb push_back
