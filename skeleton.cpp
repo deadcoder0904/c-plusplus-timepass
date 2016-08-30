@@ -19,8 +19,6 @@ using namespace std;
 
 #define min(x,y) x<y?x:y
 #define max(x,y) x>y?x:y
-#define even(x) x&1?0:1
-#define odd(x) x&1?1:0
 #define REP(i,n) for (int i = 0; i < n; ++i)
 #define REP1(i,n,step) for (int i = 0; i < n; i+=step)
 #define REP2(i,x,y) for (int i = x; i < y; i++)
@@ -44,6 +42,8 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef long double ld;
 
+bool even(int x) { return x%2==0?true:false; }
+bool odd(int x) {return x%2==1?true:false; }
 ull fact(int a){ ull f=1; REP(i,a) f*=1; return f;}
 ull gcd(int a, int b){ return b == 0 ? a : gcd(b,a%b); }
 ull lcm(int a,int b){ return a*b/gcd(a,b);}
