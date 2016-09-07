@@ -54,21 +54,15 @@ ll fast_expo(ll a,ll b)
     return b&1 ? a*fast_expo(fast_expo(a,(b-1)/2),2) : fast_expo(fast_expo(a,b/2),2);
 }
 
-int first_occurrence(int a[],int n,int num){
-	int low=0,high=n-1,mid,first_index=-1;
-	while(low<=high)
-	{
-		mid = (low+high)/2;
-		if(num==a[mid])
-			{
-				first_index=mid;
-				high=mid-1;
-			}
-		else if(num>a[mid])
-				low=mid+1;
-			else high=mid-1;
-	}
-	return first_index;
+int recursive_last_occurrence(int a[],int num,int low,int high,int last_index){
+	if(low>high)
+		return last_index;
+	int mid = (low+high)/2;
+	if(num == a[mid])
+			return recursive_last_occurrence(a,num,mid+1,high,mid);
+	if(num > a[mid])
+			return recursive_last_occurrence(a,num,mid+1,high,last_index);
+	return recursive_last_occurrence(a,num,low,mid-1,last_index);
 }
 
 int main()
@@ -80,6 +74,6 @@ int main()
 		cin>>a[i++];
 	int no;
 	cin>>no;
-	cout<<first_occurrence(a,n,no)<<endl;
+	cout<<recursive_last_occurrence(a,no,0,n-1,-1)<<endl;
 	return 0;
 }
