@@ -54,7 +54,7 @@ ll fast_expo(ll a,ll b)
     return b&1 ? a*fast_expo(fast_expo(a,(b-1)/2),2) : fast_expo(fast_expo(a,b/2),2);
 }
 
-int binary_search(int a[],int n,int num){
+int recursive_binary_search(int a[],int n,int num){
 	int low=0,high=n-1,mid;
 	while(low<=high)
 	{
@@ -77,6 +77,6 @@ int main()
 		cin>>a[i++];
 	int no;
 	cin>>no;
-	cout<<binary_search(a,n,no);
+	cout<<recursive_binary_search(a,n,no);
 	return 0;
 }
