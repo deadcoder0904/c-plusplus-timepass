@@ -43,12 +43,37 @@ void input_array(int a[],int n){ REP(i,n) cin>>a[i];}
 void print_array(int a[],int n){ REP(i,n) cout<<a[i]<<" "; cout<<endl;}
 
 void selection_sort(int a[],int n){
+	cout<<"Selection Sort"<<endl;
+	int swaps=0;
 	REP(i,n-1){
 		int minI=i;
 		REP2(j,i+1,n)
 			if(a[j]<a[minI]) minI=j;
-		swap(&a[i],&a[minI]);		
+		cout<<"Swap "<<a[i]<<"<->"<<a[minI]<<endl;	
+		swap(&a[i],&a[minI]);
+		swaps++;
 	}
+	cout<<"No. of Swaps = "<<swaps<<endl;
+}
+
+void modified_selection_sort(int a[],int n){
+	cout<<"Modified Selection Sort"<<endl;
+	int swaps=0;
+	REP(i,n-1){
+		int minI=i;
+		bool isSwapped=false;
+		REP2(j,i+1,n)
+			if(a[j]<a[minI]) {
+				minI=j;
+				isSwapped=true;
+			}
+		if(!isSwapped)
+			break;	
+		cout<<"Swap "<<a[i]<<"<->"<<a[minI]<<endl;
+		swap(&a[i],&a[minI]);
+		swaps++;
+	}
+	cout<<"No. of Swaps = "<<swaps<<endl;
 }
 
 int main()
@@ -59,10 +84,33 @@ int main()
 	{
 		int n;
 		cin>>n;
-		int a[n];
+		int a[n],b[n];
 		input_array(a,n);
+		REP(i,n)
+			b[i]=a[i];
 		selection_sort(a,n);
 		print_array(a,n);
+		modified_selection_sort(b,n);
+		print_array(b,n);
 	}
 	return 0;
 }
+
+
+/*
+Output --->
+1
+5
+5 2 3 4 1
+Selection Sort
+Swap 5<->1
+Swap 2<->2
+Swap 3<->3
+Swap 4<->4
+No. of Swaps = 4
+1 2 3 4 5 
+Modified Selection Sort
+Swap 5<->1
+No. of Swaps = 1
+1 2 3 4 5
+*/
