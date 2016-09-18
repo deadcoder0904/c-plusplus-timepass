@@ -42,37 +42,22 @@ ll fast_expo(ll a,ll b)
 void input_array(int a[],int n){ REP(i,n) cin>>a[i];}
 void print_array(int a[],int n){ REP(i,n) cout<<a[i]<<" "; cout<<endl;}
 
-void selection_sort(int a[],int n){
-	cout<<"Selection Sort"<<endl;
-	int swaps=0,pass=0;
-	REP(i,n-1){
-		int minI=i;
-		REP2(j,i+1,n)
-			if(a[j]<a[minI]) minI=j;
-		cout<<"Swap "<<a[i]<<"<->"<<a[minI]<<endl;	
-		swap(&a[i],&a[minI]);
-		swaps++;
-		pass++;
-	}
-	cout<<"No. of Swaps = "<<swaps<<endl;
-	cout<<"No. of Passes = "<<pass<<endl;
-}
-
-void modified_selection_sort(int a[],int n){
-	cout<<"Modified Selection Sort"<<endl;
-	int swaps=0,pass=0;
-	REP(i,n-1){
-		int minI=i;
-		REP2(j,i+1,n)
-			if(a[j]<a[minI]) minI=j;
-		if(minI != i){
-			cout<<"Swap "<<a[i]<<"<->"<<a[minI]<<endl;	
-			swap(&a[i],&a[minI]);
-			swaps++;
+void insertion_sort(int a[],int n){
+	cout<<"Insertion Sort"<<endl;
+	int shifts=0,pass=0;
+	REP2(i,1,n)
+		{
+			int temp = a[i],j=i;
+			while(j>0 && a[j-1]>temp){
+				cout<<"Shift "<<a[j]<<"<->"<<a[j-1]<<endl;	
+				shifts++;
+				a[j]=a[j-1];
+				j--;
+			}
+			a[j] = temp;
+			pass++;
 		}
-		pass++;
-	}
-	cout<<"No. of Swaps = "<<swaps<<endl;
+	cout<<"No. of Shifts = "<<shifts<<endl;
 	cout<<"No. of Passes = "<<pass<<endl;
 }
 
@@ -84,14 +69,10 @@ int main()
 	{
 		int n;
 		cin>>n;
-		int a[n],b[n];
+		int a[n];
 		input_array(a,n);
-		REP(i,n)
-			b[i]=a[i];
-		selection_sort(a,n);
+		insertion_sort(a,n);
 		print_array(a,n);
-		modified_selection_sort(b,n);
-		print_array(b,n);
 	}
 	return 0;
 }
@@ -102,17 +83,9 @@ Output --->
 1
 5
 1 2 3 5 4
-Selection Sort
-Swap 1<->1
-Swap 2<->2
-Swap 3<->3
-Swap 5<->4
-No. of Swaps = 4
-No. of Passes = 4
-1 2 3 4 5 
-Modified Selection Sort
-Swap 5<->4
-No. of Swaps = 1
+Insertion Sort
+Shift 4<->5
+No. of Shifts = 1
 No. of Passes = 4
 1 2 3 4 5 
 
@@ -120,17 +93,15 @@ No. of Passes = 4
 1
 5
 5 2 3 4 1
-Selection Sort
-Swap 5<->1
-Swap 2<->2
-Swap 3<->3
-Swap 4<->4
-No. of Swaps = 4
+Insertion Sort
+Shift 2<->5
+Shift 3<->5
+Shift 4<->5
+Shift 1<->5
+Shift 5<->4
+Shift 4<->3
+Shift 3<->2
+No. of Shifts = 7
 No. of Passes = 4
-1 2 3 4 5 
-Modified Selection Sort
-Swap 5<->1
-No. of Swaps = 1
-No. of Passes = 2
 1 2 3 4 5 
 */
