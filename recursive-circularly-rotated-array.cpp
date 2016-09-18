@@ -54,21 +54,18 @@ ll fast_expo(ll a,ll b)
     return b&1 ? a*fast_expo(fast_expo(a,(b-1)/2),2) : fast_expo(fast_expo(a,b/2),2);
 }
 
-int min_index(int a[],int n){
-	int low=0,high=n-1;
-	while(low<=high){
-		if(a[low]<=a[high])
-			return low;
-		int mid = (low+high)/2;
-		int next=(mid+1)%n,prev=(mid+n-1)%n;
-		if(a[next]>=a[mid] && a[prev]>=a[mid])
-			return mid;
-		else if(a[mid]<=a[high])
-				high=mid-1;
-			else if(a[low]<=a[mid])
-				low=mid+1;
-	}
-	return -1;
+int min_index(int a[],int n,int low,int high){
+	if(a[low]<=a[high])
+		return low;
+	int mid = (low+high)/2;
+	int next = (mid+1)%n, prev = (mid+n-1)%n;
+	if(a[next]>=a[mid] && a[prev]>=a[mid])
+		return mid;
+	if(a[mid] <= a[high])
+		return min_index(a,n,low,mid-1);
+	if(a[low] <= a[mid])
+		return min_index(a,n,mid+1,high);
+	return -1;	
 }
 
 int main()
@@ -78,7 +75,7 @@ int main()
 	int a[n];
 	while(i<n)
 		cin>>a[i++];
-	int index = min_index(a,n);
+	int index = min_index(a,n,0,n-1);
 	int final_index =min(index,(n-index)%n);
 	cout<<final_index<<endl;
 	return 0;
@@ -97,5 +94,5 @@ Input-
 5
 2 3 4 5 1
 Output-
-2
+1
 */
