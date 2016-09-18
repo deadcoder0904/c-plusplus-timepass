@@ -55,14 +55,20 @@ ll fast_expo(ll a,ll b)
 }
 
 int min_index(int a[],int n){
-	int min=a[0],index=0;
-	for (int i = 1; i < n; ++i)
-		if(a[i]<min)
-			{
-				min=a[i];
-				index=i;
-			}
-	return index;		
+	int low=0,high=n-1;
+	while(low<=high){
+		if(a[low]<=a[high])
+		return low;
+		int mid = (low+high)/2;
+		int next=(mid+1)%n,prev=(mid+n-1)%n;
+		if(a[next]>=a[mid] && a[prev]>=a[mid])
+			return mid;
+		else if(a[mid]<=a[high])
+				high=mid-1;
+			else if(a[low]<=a[mid])
+				low=mid+1;
+	}
+	return -1;
 }
 
 int main()
@@ -91,5 +97,5 @@ Input-
 5
 2 3 4 5 1
 Output-
-1
+2
 */
