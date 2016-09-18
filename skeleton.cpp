@@ -54,8 +54,8 @@ ll fast_expo(ll a,ll b)
     if(b==2) return a*a;
     return b&1 ? a*fast_expo(fast_expo(a,(b-1)/2),2) : fast_expo(fast_expo(a,b/2),2);
 }
-void input_array(int *a,int n){ REP(i,n) cin>>a[i];}
-void print_array(int *a,int n){ REP(i,n) cout<<a[i]; cout<<endl;}
+void input_array(int a[],int n){ REP(i,n) cin>>a[i];}
+void print_array(int a[],int n){ REP(i,n) cout<<a[i]<<" "; cout<<endl;}
 
 int main()
 {
