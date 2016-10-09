@@ -47,14 +47,14 @@ void insertion_sort(int a[],int n){
 	int shifts=0,pass=0;
 	REP2(i,1,n)
 		{
-			int temp = a[i],j=i;
-			while(j>0 && a[j-1]>temp){
-				cout<<"Shift "<<a[j]<<"<->"<<a[j-1]<<endl;	
+			int temp = a[i],hole=i;
+			while(hole>0 && a[hole-1]>temp){
+				cout<<"Shift "<<a[hole]<<"<->"<<a[hole-1]<<endl;	
 				shifts++;
-				a[j]=a[j-1];
-				j--;
+				a[hole]=a[hole-1];
+				hole--;
 			}
-			a[j] = temp;
+			a[hole] = temp;
 			pass++;
 		}
 	cout<<"No. of Shifts = "<<shifts<<endl;
