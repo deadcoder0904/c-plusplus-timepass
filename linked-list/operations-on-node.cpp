@@ -86,6 +86,30 @@ void deleteNodeWithSpecifiedKey(node **head, dataType key) {
 	free(temp);
 }
 
+void deleteNodeWithSpecifiedPostion(node **head, int position) {
+	node *temp = *head;
+
+	if(temp == NULL)
+		return;
+
+	if(position == 0) {
+		*head = temp->next;
+		free(temp);
+		return;
+	}
+
+	for(int i = 0; temp != NULL && i < position - 1; i++)
+		temp = temp->next;
+
+	if(temp == NULL || temp->next == NULL)
+		return;
+
+	node *next = temp->next->next;
+	
+	free(temp->next);
+	temp->next = next;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -96,6 +120,8 @@ int main()
 	insertAtEnd(&head,'D');
 	deleteNodeWithSpecifiedKey(&head,'D');
 	deleteNodeWithSpecifiedKey(&head,'A');
+	printList(head);
+	deleteNodeWithSpecifiedPostion(&head,2);
 	printList(head);
 	return 0;
 }
@@ -109,5 +135,5 @@ B->A->C->E->NULL
 B->A->C->E->D->NULL
 B->A->C->E->NULL
 B->C->E->NULL
-
+B->C->NULL
 */
