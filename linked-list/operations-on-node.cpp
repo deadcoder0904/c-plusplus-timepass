@@ -127,6 +127,24 @@ int recursiveLength(node *head) {
 	return recursiveLength(head->next) + 1;
 }
 
+int iterativeSearch(node *head, dataType key) {
+	node *temp = head;
+	while(temp != NULL) {
+		if(temp->data == key)
+			return true;
+		temp = temp->next;
+	}
+	return false;
+}
+
+int recursiveSearch(node *head, dataType key) {
+	if(head == NULL)
+		return false;
+	if(head->data == key)
+		return true;
+	return recursiveSearch(head->next,key);
+}
+
 int main()
 {
 	node *head = NULL;
@@ -142,6 +160,8 @@ int main()
 	printList(head);
 	cout<<"Length of Linked List using Iterative Method : "<<iterativeLength(head)<<endl;
 	cout<<"Length of Linked List using Recursive Method : "<<recursiveLength(head)<<endl;
+	cout<<"Search key in a Linked List using Iterative Method : "<<iterativeSearch(head,'C')<<endl;
+	cout<<"Search key in a Linked List using Recursive Method : "<<recursiveSearch(head,'Z')<<endl;
 	return 0;
 }
 
