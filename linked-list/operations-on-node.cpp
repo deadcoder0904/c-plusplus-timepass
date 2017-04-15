@@ -176,6 +176,19 @@ void swapNodes(node **head, dataType x, dataType y) {
 	currentX->next = temp;
 }
 
+dataType getNthNode(node *head, int n) {
+	node *temp = head;
+	int count = 0;
+	while(temp != NULL) {
+		if(count == n)
+			return temp->data;
+		count++;
+		temp = temp->next;
+	}
+
+	return '0';
+}
+
 int main()
 {
 	node *head = NULL;
@@ -198,6 +211,7 @@ int main()
 	swapNodes(&head,'B','C');
 	cout<<"After Swapping Nodes : "<<endl;
 	printList(head);
+	cout<<"Get 2nd Node : "<<getNthNode(head,1)<<endl;
 	return 0;
 }
 
