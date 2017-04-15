@@ -121,7 +121,6 @@ int iterativeLength(node *head) {
 }
 
 int recursiveLength(node *head) {
-	int length = 0;
 	if(head == NULL)
 		return 0;
 	return recursiveLength(head->next) + 1;
@@ -145,6 +144,38 @@ int recursiveSearch(node *head, dataType key) {
 	return recursiveSearch(head->next,key);
 }
 
+void swapNodes(node **head, dataType x, dataType y) {
+	if(x == y) 
+		return;
+
+	node *prevX = NULL, *currentX = *head;
+	while(currentX != NULL && currentX->data != x) {
+		prevX = currentX;
+		currentX = currentX->next;
+	}
+
+	node *prevY = NULL, *currentY = *head;
+	while(currentY != NULL && currentY->data != y) {
+		prevY = currentY;
+		currentY = currentY->next;
+	}
+
+	if(currentX == NULL || currentY == NULL)
+		return;
+
+	if(prevX != NULL)
+		prevX->next = currentY;
+	else *head = currentY;
+
+	if(prevY != NULL)
+		prevY->next = currentX;
+	else *head = currentX;
+
+	node *temp = currentY->next;
+	currentY->next = currentX->next;
+	currentX->next = temp;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -162,6 +193,11 @@ int main()
 	cout<<"Length of Linked List using Recursive Method : "<<recursiveLength(head)<<endl;
 	cout<<"Search key in a Linked List using Iterative Method : "<<iterativeSearch(head,'C')<<endl;
 	cout<<"Search key in a Linked List using Recursive Method : "<<recursiveSearch(head,'Z')<<endl;
+	cout<<"Before Swapping Nodes : "<<endl;
+	printList(head);
+	swapNodes(&head,'B','C');
+	cout<<"After Swapping Nodes : "<<endl;
+	printList(head);
 	return 0;
 }
 
