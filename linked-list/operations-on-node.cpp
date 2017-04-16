@@ -189,6 +189,77 @@ dataType getNthNode(node *head, int n) {
 	return '0';
 }
 
+dataType getMiddleNode1(node *head) {
+	if(head == NULL)
+		return '0';
+	int count = 0;
+	node *temp = head;
+	for(count = 0; temp != NULL; count++) 
+		temp = temp->next;
+	temp = head;
+	for(int i = 0; i < count/2; i++)
+		temp = temp->next;
+	return temp->data;
+}
+
+dataType getMiddleNode2(node *head) {
+	if(head == NULL)
+		return '0';
+
+	node *slow_ptr = head, *fast_ptr = head;
+
+	while(fast_ptr != NULL && fast_ptr->next != NULL) {
+		slow_ptr = slow_ptr->next;
+		fast_ptr = fast_ptr->next->next;
+	}
+
+	return slow_ptr->data;
+}
+
+dataType getMiddleNode3(node *head) {
+	if(head == NULL)
+		return '0';
+	
+	node *mid = head;
+	
+	for(int count = 0; head != NULL; count++) {
+		if(count & 1)
+			mid = mid->next;
+		head = head->next;
+	}
+
+	return mid->data;
+}
+
+dataType getNthNodeFromLast(node *head, int n) {
+	node *temp = head;
+	int len;
+	
+	for(len = 0; temp != NULL; len++)
+		temp = temp->next;
+
+	if(len < n)
+		return '0';
+	
+	temp = head;
+	for(int i = 0; i < len - n; i++)
+		temp = temp->next;
+	
+	return temp->data;
+}
+
+void deleteLinkedList(node **head) {
+	node *current = *head, *next;
+
+	while(current != NULL) {
+		next = current->next;
+		free(current);
+		current = next;
+	}
+
+	*head = NULL;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -197,6 +268,11 @@ int main()
 	insertAfter(head,'C');
 	insertAtStart(&head,'B');
 	insertAtEnd(&head,'D');
+	printList(head);
+	cout<<"Get Middle Node 1 : "<<getMiddleNode1(head)<<endl;
+	cout<<"Get Middle Node 2 : "<<getMiddleNode2(head)<<endl;
+	cout<<"Get Middle Node 3 : "<<getMiddleNode1(head)<<endl;
+	cout<<"Get 2nd Node From Last : "<<getNthNodeFromLast(head,2)<<endl;
 	deleteNodeWithSpecifiedKey(&head,'D');
 	deleteNodeWithSpecifiedKey(&head,'A');
 	printList(head);
@@ -212,6 +288,8 @@ int main()
 	cout<<"After Swapping Nodes : "<<endl;
 	printList(head);
 	cout<<"Get 2nd Node : "<<getNthNode(head,1)<<endl;
+	deleteLinkedList(&head);
+	printList(head);
 	return 0;
 }
 
