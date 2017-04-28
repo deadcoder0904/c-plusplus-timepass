@@ -260,6 +260,16 @@ void deleteLinkedList(node **head) {
 	*head = NULL;
 }
 
+int frequencyOfNode(node *head, dataType key) {
+	int count = 0;
+	while(head != NULL) {
+		if(head->data == key)
+			count++;
+		head = head->next;
+	}
+	return count;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -290,17 +300,18 @@ int main()
 	cout<<"Get 2nd Node : "<<getNthNode(head,1)<<endl;
 	deleteLinkedList(&head);
 	printList(head);
+	insertAtStart(&head, 'E');
+	insertAtStart(&head, 'D');
+	insertAtStart(&head, 'A');
+	insertAtStart(&head, 'F');
+	insertAtStart(&head, 'A');
+	insertAtStart(&head, 'C');
+	insertAtStart(&head, 'A');
+	insertAtStart(&head, 'B');
+	insertAtStart(&head, 'C');
+	insertAtStart(&head, 'A');
+	insertAtStart(&head, 'A');
+	printList(head);
+	cout<<"Node 'A' appeared "<<frequencyOfNode(head,'A')<<" times"<<endl;
 	return 0;
 }
-
-/*
-
-A->NULL
-A->E->NULL
-A->C->E->NULL
-B->A->C->E->NULL
-B->A->C->E->D->NULL
-B->A->C->E->NULL
-B->C->E->NULL
-B->C->NULL
-*/
