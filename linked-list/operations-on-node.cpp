@@ -270,6 +270,17 @@ int frequencyOfNode(node *head, dataType key) {
 	return count;
 }
 
+void reverseList(node **head) {
+	node *prev = NULL, *current = *head, *next;
+	while(current != NULL) {
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	*head = prev;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -311,6 +322,8 @@ int main()
 	insertAtStart(&head, 'C');
 	insertAtStart(&head, 'A');
 	insertAtStart(&head, 'A');
+	printList(head);
+	reverseList(&head);
 	printList(head);
 	cout<<"Node 'A' appeared "<<frequencyOfNode(head,'A')<<" times"<<endl;
 	return 0;
