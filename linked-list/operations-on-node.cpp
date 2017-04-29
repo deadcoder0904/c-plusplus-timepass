@@ -372,6 +372,13 @@ void sortedInsert(node **head, dataType data) {
 	}
 }
 
+void deleteNodeOnlyGivenPointerToNode(node* ptr) {
+	node* temp = ptr->next;
+	ptr->data = temp->data;
+	ptr->next = temp->next;
+	free(temp);
+}
+
 int main()
 {
 	node *head = NULL;
@@ -443,6 +450,9 @@ int main()
 	
 	sortedInsert(&head3, 'D');
 	printList(head3);
-	
+
+	deleteNodeOnlyGivenPointerToNode(head3);
+	printList(head3);
+
 	return 0;
 }
