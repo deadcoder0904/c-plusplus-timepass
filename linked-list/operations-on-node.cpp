@@ -357,6 +357,21 @@ node* recursiveMergeSort(node *x, node *y) {
 	return head;
 }
 
+void sortedInsert(node **head, dataType data) {
+	if(*head == NULL) return;
+	node *temp = *head;
+	node* new_node = (node*) malloc(sizeof(node));
+	new_node->data = data;
+	while(temp != NULL && temp->next != NULL) {
+		if(temp->next->data > data) {
+			new_node->next = temp->next;
+			temp->next = new_node;
+			break;
+		}
+		temp = temp->next;
+	}
+}
+
 int main()
 {
 	node *head = NULL;
@@ -425,6 +440,9 @@ int main()
 	cout<<"Recursively Merged linked list is :"<<endl;
 	head3 = recursiveMergeSort(head1, head2);
 	printList(head3);
-
+	
+	sortedInsert(&head3, 'D');
+	printList(head3);
+	
 	return 0;
 }
