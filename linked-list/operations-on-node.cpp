@@ -478,6 +478,20 @@ void swapPairsRecursive(node *head) {
 	swapPairsRecursive(head->next->next);
 }
 
+void moveLastToFirst(node **head) {
+	if(*head == NULL) return;
+
+	node *last = *head, *prev = NULL;
+
+	while(last->next != NULL) {
+		prev = last;
+		last = last->next;
+	}
+	prev->next = NULL;
+	last->next = *head;
+	*head = last;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -606,6 +620,9 @@ int main()
 	printList(head);
 	swapPairsRecursive(head);
 	printList(head);
-	
+
+	moveLastToFirst(&head);
+	printList(head);
+
 	return 0;
 }
