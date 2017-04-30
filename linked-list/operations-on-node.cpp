@@ -379,6 +379,28 @@ void deleteNodeOnlyGivenPointerToNode(node* ptr) {
 	free(temp);
 }
 
+node* cloneLinkedListInReverse(node *temp) {
+	node *head = NULL;
+	while(temp != NULL) {
+		insertAtStart(&head,temp->data);
+		temp = temp->next;
+	}
+	return head;
+}
+
+int isPalindrome(node *temp1,node *temp2) {
+	node *head1 = temp1, *head2 = temp2;
+
+	while(head1 != NULL && head2 != NULL)
+		if(head1->data != head2->data)
+			return 0;
+		else {
+			head1 = head1->next;
+			head2 = head2->next;
+		}
+	return 1;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -453,6 +475,20 @@ int main()
 
 	deleteNodeOnlyGivenPointerToNode(head3);
 	printList(head3);
+
+	cout<<"1st Linked List : "<<endl;
+	printList(head1);
+
+	head2 = cloneLinkedListInReverse(head1);
+
+	cout<<"2nd Linked List : "<<endl;
+	printList(head2);
+
+	int palindrome = isPalindrome(head1,head2);
+
+	if(palindrome)
+		cout<<"Palindrome"<<endl;
+	else cout<<"Not Palindrome"<<endl;
 
 	return 0;
 }
