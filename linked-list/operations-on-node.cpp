@@ -399,6 +399,12 @@ int isPalindrome(node *head1,node *head2) {
 	return 1;
 }
 
+void recursiveReversePrintList(node *head) {
+	if(head == NULL) return;
+	recursiveReversePrintList(head->next);
+	cout<<head->data<<" ->";
+}
+
 int main()
 {
 	node *head = NULL;
@@ -488,5 +494,9 @@ int main()
 		cout<<"Palindrome"<<endl;
 	else cout<<"Not Palindrome"<<endl;
 
+	printList(head);
+	recursiveReversePrintList(head);
+	cout<<"NULL";
+	
 	return 0;
 }
