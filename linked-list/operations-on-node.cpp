@@ -405,6 +405,22 @@ void recursiveReversePrintList(node *head) {
 	cout<<head->data<<" ->";
 }
 
+void removeDuplicates(node *head) {
+	if(head == NULL)
+		return;
+
+	node *next_ptr;
+
+	while(head->next != NULL)
+		if(head->data == head->next->data) {
+			next_ptr = head->next->next;
+			free(head->next);
+			head->next = next_ptr;
+		}
+		else
+			head = head->next;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -497,6 +513,21 @@ int main()
 	printList(head);
 	recursiveReversePrintList(head);
 	cout<<"NULL";
-	
+
+	node *head4 = NULL;
+	insertAtStart(&head4, 'E');
+	insertAtStart(&head4, 'D');
+	insertAtStart(&head4, 'D');
+	insertAtStart(&head4, 'C');
+	insertAtStart(&head4, 'B');
+	insertAtStart(&head4, 'B');
+	insertAtStart(&head4, 'A');
+	insertAtStart(&head4, 'A');
+	insertAtStart(&head4, 'A');
+	cout<<endl;
+	printList(head4);
+	removeDuplicates(head4);
+	printList(head4);
+
 	return 0;
 }
