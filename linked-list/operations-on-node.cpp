@@ -405,7 +405,7 @@ void recursiveReversePrintList(node *head) {
 	cout<<head->data<<" ->";
 }
 
-void removeDuplicates(node *head) {
+void removeDuplicatesFromSortedList(node *head) {
 	if(head == NULL)
 		return;
 
@@ -419,6 +419,41 @@ void removeDuplicates(node *head) {
 		}
 		else
 			head = head->next;
+}
+
+void removeDuplicatesFromUnsortedList(node *head) {
+	if(head == NULL)
+		return;
+
+	node *fixed = head, *moving;
+	while(fixed != NULL && fixed->next != NULL) {
+		moving = fixed;
+		while(moving->next != NULL) {
+			if(fixed->data == moving->next->data) {
+				node *next_ptr = moving->next;
+				moving->next = next_ptr->next;
+				free(next_ptr);
+			}
+			else moving = moving->next;
+		}
+		fixed = fixed->next;
+	}
+}
+
+void removeDuplicatesFromUnsortedListUsingHashing(node *head) {
+	unordered_set<int> seen;
+	node *current = head, *prev = NULL;
+	while(current != NULL) {
+		if(seen.find(current->data) != seen.end()) {
+			prev->next = current->next;
+			free(current);
+		}
+		else {
+			seen.insert(current->data);
+			prev = current;
+		}
+		current = prev->next;
+	}
 }
 
 int main()
@@ -526,8 +561,23 @@ int main()
 	insertAtStart(&head4, 'A');
 	cout<<endl;
 	printList(head4);
-	removeDuplicates(head4);
+	removeDuplicatesFromSortedList(head4);
 	printList(head4);
 
+	insertAtStart(&head, 'C');
+	insertAtStart(&head, 'A');
+	insertAtStart(&head, 'B');
+	insertAtStart(&head, 'A');
+	insertAtStart(&head, 'A');
+	printList(head);
+	removeDuplicatesFromUnsortedList(head);
+	printList(head);
+	insertAtStart(&head, 'C');
+	insertAtStart(&head, 'A');
+	insertAtStart(&head, 'B');
+	insertAtStart(&head, 'A');
+	insertAtStart(&head, 'A');
+	removeDuplicatesFromUnsortedListUsingHashing(head);
+	
 	return 0;
 }
