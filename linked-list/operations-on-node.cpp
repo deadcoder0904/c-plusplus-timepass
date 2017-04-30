@@ -456,6 +456,28 @@ void removeDuplicatesFromUnsortedListUsingHashing(node *head) {
 	}
 }
 
+void swap(dataType *a, dataType *b) {
+	dataType temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void swapPairsIterative(node *head) {
+	if(head == NULL) return;
+
+	while(head != NULL && head->next != NULL) {
+		swap(&(head->data),&(head->next->data));
+		head = head->next->next;
+	}
+}
+
+void swapPairsRecursive(node *head) {
+	if(head == NULL || head->next == NULL) return;
+	
+	swap(&(head->data),&(head->next->data));
+	swapPairsRecursive(head->next->next);
+}
+
 int main()
 {
 	node *head = NULL;
@@ -578,6 +600,12 @@ int main()
 	insertAtStart(&head, 'A');
 	insertAtStart(&head, 'A');
 	removeDuplicatesFromUnsortedListUsingHashing(head);
+
+	printList(head);
+	swapPairsIterative(head);
+	printList(head);
+	swapPairsRecursive(head);
+	printList(head);
 	
 	return 0;
 }
