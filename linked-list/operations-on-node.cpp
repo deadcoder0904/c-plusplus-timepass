@@ -492,6 +492,56 @@ void moveLastToFirst(node **head) {
 	*head = last;
 }
 
+node* intersectionOfTwoSortedListsUsingDummyNode(node *head1, node *head2) {
+	node head, *tail = &head;
+	head.next = NULL;
+	while(head1 != NULL && head2 != NULL) {
+		if(head1->data == head2->data) {
+			insertAtEnd(&tail->next,head1->data);
+			tail = tail->next;
+			head1 = head1->next;
+			head2 = head2->next;
+		}
+		else if(head1->data < head2->data)
+					head1 = head1->next;
+				else head2 = head2->next;
+	}
+	return head.next;
+}
+
+node* intersectionOfTwoSortedListsUsingPointerOfPointer(node *head1, node *head2) {
+	node *head = NULL, **tail = &head;
+	while(head1 != NULL && head2 != NULL) {
+		if(head1->data == head2->data) {
+			insertAtEnd(tail,head1->data);
+			tail = &((*tail)->next);
+			head1 = head1->next;
+			head2 = head2->next;
+		}
+		else if(head1->data < head2->data)
+					head1 = head1->next;
+				else head2 = head2->next;
+	}
+	return head;
+}
+
+node* intersectionOfTwoSortedListsUsingRecursion(node *head1, node *head2) {
+	node *head = NULL;
+	if(head1 == NULL || head2 == NULL) return NULL;
+
+	if(head1->data < head2->data)
+		return intersectionOfTwoSortedListsUsingRecursion(head1->next, head2);
+
+	if(head1->data > head2->data)
+		return intersectionOfTwoSortedListsUsingRecursion(head1, head2->next);
+	
+	node *new_node = (node *)malloc(sizeof(node));
+	new_node->data = head1->data;
+
+	new_node->next = intersectionOfTwoSortedListsUsingRecursion(head1->next, head2->next);
+	return new_node;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -623,6 +673,30 @@ int main()
 
 	moveLastToFirst(&head);
 	printList(head);
+
+	node *head11 = NULL;
+	insertAtEnd(&head11, 'A');
+	insertAtEnd(&head11, 'B');
+	insertAtEnd(&head11, 'C');
+	insertAtEnd(&head11, 'D');
+	insertAtEnd(&head11, 'E');
+	cout<<"1st linked list : "<<endl;
+	printList(head11);
+	node *head22 = NULL;
+	insertAtEnd(&head22, 'C');
+	insertAtEnd(&head22, 'D');
+	insertAtEnd(&head22, 'E');
+	cout<<"2nd linked list : "<<endl;
+	printList(head22);
+	node *head33 = intersectionOfTwoSortedListsUsingDummyNode(head11,head22);
+	cout<<"Intersection using Dummy Node : "<<endl;
+	printList(head33);
+	node *head44 = intersectionOfTwoSortedListsUsingPointerOfPointer(head11,head22);
+	cout<<"Intersection using Pointer of Pointer : "<<endl;
+	printList(head44);
+	node *head55 = intersectionOfTwoSortedListsUsingRecursion(head11,head22);
+	cout<<"Intersection using Recursion : "<<endl;
+	printList(head55);
 
 	return 0;
 }
