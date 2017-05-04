@@ -574,6 +574,21 @@ void alternateSplitting(node *head, node **x, node **y) {
 	}
 }
 
+string identicalLinkedLists(node *x, node *y) {
+	if(x == y) return "Linked Lists are Identical";
+
+	while(x != NULL && y != NULL) {
+		if(x->data != y->data)
+			return "Linked Lists are Not Identical";
+		x = x->next;
+		y = y->next;
+	}
+	
+	if(x == NULL && y == NULL) 
+		return "Linked Lists are Identical";
+	return "Linked Lists are Not Identical";
+}
+
 int main()
 {
 	node *head = NULL;
@@ -743,5 +758,8 @@ int main()
 	alternateSplitting(head, &x, &y);
 	printList(x);
 	printList(y);
+
+	cout<<identicalLinkedLists(x,y);
+
 	return 0;
 }
