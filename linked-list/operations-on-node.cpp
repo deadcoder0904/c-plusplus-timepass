@@ -542,6 +542,17 @@ node* intersectionOfTwoSortedListsUsingRecursion(node *head1, node *head2) {
 	return new_node;
 }
 
+void deleteAlternateNodes(node **head) {
+	node *current = *head, *next_ptr;
+
+	while(current != NULL && current->next != NULL) {
+		next_ptr = current->next;
+		current->next = next_ptr->next;
+		free(next_ptr);
+		current = current->next;
+	}
+}
+
 int main()
 {
 	node *head = NULL;
@@ -696,6 +707,9 @@ int main()
 	printList(head44);
 	node *head55 = intersectionOfTwoSortedListsUsingRecursion(head11,head22);
 	cout<<"Intersection using Recursion : "<<endl;
+	printList(head55);
+
+	deleteAlternateNodes(&head55);
 	printList(head55);
 
 	return 0;
