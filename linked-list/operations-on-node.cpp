@@ -562,6 +562,18 @@ void deleteAlternateNodesRecursive(node *head) {
 	deleteAlternateNodesRecursive(head->next);
 }
 
+void alternateSplitting(node *head, node **x, node **y) {
+	if(head == NULL) return;
+	int count = 1;
+	while(head != NULL) {
+		if(count%2 == 1)
+			insertAtEnd(x, head->data);
+		else insertAtEnd(y, head->data);
+		count++;
+		head = head->next;
+	}
+}
+
 int main()
 {
 	node *head = NULL;
@@ -725,5 +737,11 @@ int main()
 	deleteAlternateNodesRecursive(head55);
 	printList(head55);
 
+	printList(head);
+	cout<<"Alternate Splitting of Linked List : "<<endl;
+	node *x = NULL, *y = NULL;
+	alternateSplitting(head, &x, &y);
+	printList(x);
+	printList(y);
 	return 0;
 }
