@@ -627,6 +627,21 @@ void mergeSort(node **headRef) {
 	*headRef = iterativeMergeSort(x,y);
 }
 
+node* reverseInGroups(node *head, int n) {
+	node *current = head, *prev = NULL, *next = NULL;
+	for(int i = 0; current != NULL && i < n; i++) {
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	
+	if(next != NULL)
+		head->next = reverseInGroups(next,n);
+
+	return prev;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -810,6 +825,8 @@ int main()
 	printList(head);
 	mergeSort(&head);
 	printList(head);
-	
+
+	printList(reverseInGroups(head,3));
+
 	return 0;
 }
