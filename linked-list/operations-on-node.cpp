@@ -593,6 +593,40 @@ bool identicalLinkedListsRecursive(node *x, node *y) {
 	return false;
 }
 
+void FrontBackSplit(node *head, node **x, node **y) {	
+	if(head == NULL || head->next == NULL) {
+		*x = head;
+		*y = NULL;
+		return;
+	}
+
+	node *slow = head, *fast = head->next;
+
+	while(fast != NULL) {
+		fast = fast->next;
+		if(fast != NULL) {
+			slow = slow->next;
+			fast = fast->next;
+		}
+	}
+
+	*x = head;
+	*y = slow->next;
+	slow->next = NULL;
+}
+
+void mergeSort(node **headRef) {
+	node *head = *headRef;
+	
+	if(head == NULL || head->next == NULL) return;
+
+	node *x, *y;
+	FrontBackSplit(head,&x,&y);
+	mergeSort(&x);
+	mergeSort(&y);
+	*headRef = iterativeMergeSort(x,y);
+}
+
 int main()
 {
 	node *head = NULL;
@@ -773,5 +807,9 @@ int main()
 		cout<<"Linked Lists are Identical"<<endl;
 	else cout<<"Linked Lists are Not Identical"<<endl;
 
+	printList(head);
+	mergeSort(&head);
+	printList(head);
+	
 	return 0;
 }
