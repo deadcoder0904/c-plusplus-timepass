@@ -642,6 +642,27 @@ node* reverseInGroups(node *head, int n) {
 	return prev;
 }
 
+node* alternateReverseInGroups(node *head, int n) {
+	node *current = head, *prev = NULL, *next = NULL;
+	for(int i = 0; current != NULL && i < n; i++) {
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+
+	if(head != NULL)
+		head->next = current;
+
+	for(int i = 0; current != NULL && i < n-1; i++)
+		current = current->next;
+	
+	if(current != NULL)
+		current->next = alternateReverseInGroups(current->next,n);
+
+	return prev;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -826,7 +847,13 @@ int main()
 	mergeSort(&head);
 	printList(head);
 
+	cout<<"Reverse a Linked List in Groups of Size 3 : "<<endl;
 	printList(reverseInGroups(head,3));
+
+	printList(head);
+
+	cout<<"Alternate Reverse a Linked List in Groups of Size 3 : "<<endl;
+	printList(alternateReverseInGroups(head,3));
 
 	return 0;
 }
