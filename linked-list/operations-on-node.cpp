@@ -663,6 +663,28 @@ node* alternateReverseInGroups(node *head, int n) {
 	return prev;
 }
 
+void delNodes(node *head) {
+	node *current = head, *maxnode = head;
+	while(current != NULL && current->next != NULL)
+		if(current->next->data < maxnode->data) {
+			node *temp = current->next;
+			current->next = temp->next;
+			free(temp);
+		}
+		else {
+			current = current->next;
+			maxnode = current;
+		}
+}
+
+void deleteNodesHavingGreaterValueOnRightSideIterative(node **head) {
+	if(*head == NULL) return;
+
+	iterativeReverse(head);
+	delNodes(*head);
+	iterativeReverse(head);
+}
+
 int main()
 {
 	node *head = NULL;
@@ -854,6 +876,11 @@ int main()
 
 	cout<<"Alternate Reverse a Linked List in Groups of Size 3 : "<<endl;
 	printList(alternateReverseInGroups(head,3));
+
+	printList(head11);
+	cout<<"Delete Nodes Having Greater Value on Right Side : "<<endl;
+	deleteNodesHavingGreaterValueOnRightSideIterative(&head11);
+	printList(head11);
 
 	return 0;
 }
