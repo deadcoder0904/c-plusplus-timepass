@@ -672,12 +672,36 @@ void delNodes(node *head) {
 		else current = current->next;
 }
 
-void deleteNodesHavingGreaterValueOnRightSideIterative(node **head) {
+void deleteNodesHavingGreaterValueOnRightSide(node **head) {
 	if(*head == NULL) return;
 
 	iterativeReverse(head);
 	delNodes(*head);
 	iterativeReverse(head);
+}
+
+void segregateEvenAndOdd(node **head) {
+	if(*head == NULL) return;
+
+	node *temp = *head, *even = NULL, *odd = NULL;
+	while(temp != NULL) {
+		if(temp->data & 1)
+			insertAtEnd(&odd,temp->data);
+		else insertAtEnd(&even,temp->data);
+		temp = temp->next;
+	}
+
+	if(even == NULL) {
+		*head = odd;
+		return;
+	}
+
+	temp = even;
+	while(temp->next != NULL)
+		temp = temp->next;
+	
+	temp->next = odd;
+	*head = even;	
 }
 
 int main()
@@ -874,8 +898,12 @@ int main()
 
 	printList(head11);
 	cout<<"Delete Nodes Having Greater Value on Right Side : "<<endl;
-	deleteNodesHavingGreaterValueOnRightSideIterative(&head11);
+	deleteNodesHavingGreaterValueOnRightSide(&head11);
 	printList(head11);
+
+	printList(head);
+	segregateEvenAndOdd(&head);
+	printList(head);
 
 	return 0;
 }
