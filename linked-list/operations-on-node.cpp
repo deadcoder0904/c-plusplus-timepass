@@ -704,6 +704,27 @@ void segregateEvenAndOdd(node **head) {
 	*head = even;	
 }
 
+int detectAndRemoveLoop(node *head) {
+    node *slow_ptr = head, *fast_ptr = head->next;
+    while(fast_ptr != NULL && fast_ptr->next != NULL) {
+        if(slow_ptr == fast_ptr)
+            break;
+        slow_ptr = slow_ptr->next;
+        fast_ptr = fast_ptr->next->next;
+    }
+    
+    if(slow_ptr != fast_ptr) 
+        return 0;
+
+    slow_ptr = head;
+    while(slow_ptr != fast_ptr->next) {
+        slow_ptr = slow_ptr->next;
+        fast_ptr = fast_ptr->next;
+    }
+    fast_ptr->next = NULL;
+    return 1;
+}
+
 int main()
 {
 	node *head = NULL;
@@ -904,6 +925,17 @@ int main()
 	printList(head);
 	segregateEvenAndOdd(&head);
 	printList(head);
+
+	node *headerrrrr = NULL;
+    insertAtStart(&headerrrrr, 'C');
+    insertAtStart(&headerrrrr, 'B');
+    insertAtStart(&headerrrrr, 'A');
+    headerrrrr->next->next->next = headerrrrr->next;
+    int loop = detectAndRemoveLoop(headerrrrr);
+    if(loop)
+        cout<<"Loop detected and removed"<<endl;
+    else
+        cout<<"Loop not detected"<<endl;
 
 	return 0;
 }
