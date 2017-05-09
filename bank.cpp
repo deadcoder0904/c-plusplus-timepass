@@ -6,7 +6,7 @@ class Account {
 	protected:
 		double balance;
 	public:
-		Account(double bal){	
+		Account(double bal){
 			if(bal > 0)
 				balance = bal;
 			else balance = 0;
@@ -30,11 +30,11 @@ class CheckingAccount: public Account{
 	private:
 		double fee;
 	public:
-		CheckingAccount(double bal, double f): 
+		CheckingAccount(double bal, double f):
 			Account(bal)
 		{
 			fee = f;
-		}	
+		}
 		void debit(double amount){
 			if(balance < amount+fee)
 				cout << "Insufficient Funds." << endl;

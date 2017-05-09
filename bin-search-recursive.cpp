@@ -31,10 +31,10 @@ using namespace std;
 
 #define pb push_back
 #define mp make_pair
- 
+
 const float PI=3.1415926535897932384626433832795;
 const int MOD=1e9+7;
- 
+
 typedef pair<int,int> pii;
 typedef vector<pii> vpii;
 typedef vector<int> vi;
