@@ -563,12 +563,11 @@ void deleteAlternateNodesRecursive(node *head) {
 
 void alternateSplitting(node *head, node **x, node **y) {
 	if(head == NULL) return;
-	int count = 1;
-	while(head != NULL) {
-		if(count%2 == 1)
+	
+	for(int count = 1; head != NULL; count++) {
+		if(count & 1)
 			insertAtEnd(x, head->data);
 		else insertAtEnd(y, head->data);
-		count++;
 		head = head->next;
 	}
 }
