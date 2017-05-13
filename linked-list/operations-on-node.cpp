@@ -357,9 +357,9 @@ node* recursiveMergeSort(node *x, node *y) {
 	return head;
 }
 
-void sortedInsert(node **head, dataType data) {
-	if(*head == NULL) return;
-	node *temp = *head;
+void sortedInsert(node *head, dataType data) {
+	if(head == NULL) return;
+	node *temp = head;
 	node* new_node = (node*) malloc(sizeof(node));
 	new_node->data = data;
 	while(temp != NULL && temp->next != NULL) {
@@ -794,7 +794,7 @@ int main()
 	head3 = recursiveMergeSort(head1, head2);
 	printList(head3);
 	
-	sortedInsert(&head3, 'D');
+	sortedInsert(head3, 'D');
 	printList(head3);
 
 	deleteNodeOnlyGivenPointerToNode(head3);
